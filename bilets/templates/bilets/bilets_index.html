@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример верстки</title>
+    <link rel="stylesheet" href="{% static 'vendor/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div>
+            <a href="registration.html" class="button">Регистрация</a> |
+            <a href="{% url 'bilets:UserLogin' %}" class="button">Авторизация</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="buttons-container">
+            <a href="{% url 'bilets:BuyBilets' %}" class="button">Купить билет</a>
+            <a href="{% url 'bilets:ProverkaBilets' %}" class="button">Проверить билет</a>
+        </div>
+    </main>
+</body>
+</html>

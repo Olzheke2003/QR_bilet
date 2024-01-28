@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка билета</title>
+    <link rel="stylesheet" href="{% static 'vendor/css/styles.css' %}">
+</head>
+<body>
+    <div class="check-ticket-container">
+        <h2>Введите уникальный id билета</h2>
+        <form action="{% url 'bilets:ProverkaBilets' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="small mb-1" for="{{ form.invoiceId_Vvod.id_for_label }}">ID билета:</label>
+                {{ form.invoiceId_Vvod }}
+            </div>
+            <button type="submit">Проверить билет</button>
+        </form>
+
+        <div id="checkResult" class="hidden">
+            {% if is_valid_ticket is not None %}
+                {% if is_valid_ticket %}
+                    <p>Билет действителен</p>
+                    {% if bilet %}
+                        <p>Данные билета: {{ bilet }}</p>
+                    {% endif %}
+                {% elif is_valid_ticket == False %}
+                    <p>Билет не действителен</p>
+
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <a href="{% url 'bilets:index' %}" class="button">На главную</a>
+    </div>
+</body>
+</html>

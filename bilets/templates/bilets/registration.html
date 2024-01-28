@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{% static 'vendor/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div>
+            <a href="bilets_index.html" class="button">На главную</a> |
+            <a href="login.html" class="button">Авторизация</a>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="registration-container" style="margin-top: 30px;">
+            <h2>Регистрация</h2>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Повторите пароль:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="button">Зарегистрироваться</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
