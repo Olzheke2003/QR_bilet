@@ -7,5 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
     path('bilets/', include('bilets.urls', namespace='bilets')),
-
+    path('Users/', include('Users.urls', namespace='Users')),
 ]

@@ -18,7 +18,8 @@
     <main>
         <div class="login-container" style="margin-top: 30px;">
             <h2>Авторизация</h2>
-            <form>
+            <form action="{% url 'Users:UserLogin' %}" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <label class="small mb-1" for="{{ form.email.id_for_label }}">Email:</label>
                     {{ form.email }}

@@ -1,26 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from django.contrib.auth.views import LoginView
-from bilets.forms import UserLoginForm
 from django.views.generic import ListView
 from bilets.models import Bilets
 from django.core.mail import send_mail
-from django.views.generic import FormView
 from bilets.forms import ProverkaForm
 from django.views import View
-from .models import Proverka
 import uuid
 
 
 class IndexView(TemplateView):
     template_name = 'bilets/bilets_index.html'
     title = 'Buy bilets'
-
-
-class UserLoginView(LoginView):
-    template_name = 'bilets/login.html'
-    form_class = UserLoginForm
-    title = 'Авторизация'
 
 
 class BuyBilets(ListView):
@@ -55,15 +45,11 @@ class ProverkaBilets(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             try:
-                # Пытаемся найти билет по введенному ID
                 invoice_id_vvod = form.cleaned_data['invoiceId_Vvod']
                 bilet = Bilets.objects.get(invoiceId=invoice_id_vvod)
-
-                # Если билет найден, считаем его действительным
                 return render(request, self.template_name, {'form': form, 'is_valid_ticket': True, 'bilet': bilet})
 
             except Bilets.DoesNotExist:
-                # Если билет не найден, считаем его недействительным
                 return render(request, self.template_name, {'form': form, 'is_valid_ticket': False, 'bilet': None})
 
         return render(request, self.template_name, {'form': form, 'is_valid_ticket': None, 'bilet': None})
